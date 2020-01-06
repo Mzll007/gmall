@@ -1,11 +1,13 @@
 package com.mzll.gmall.user.handler;
 
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.mzll.gmall.bean.UmsMember;
-import com.mzll.gmall.bean.service.UmsMemberService;
+import com.mzll.gmall.service.UmsMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -14,9 +16,11 @@ public class UmsMemberHandler {
 
 
 
-    @Autowired
+    @Reference
     private UmsMemberService umsMemberService;
 
+
+    @ResponseBody
     @RequestMapping("get/all/member")
     public List<UmsMember> getAllMember(){
 
