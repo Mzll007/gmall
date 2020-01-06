@@ -13,8 +13,9 @@ import java.util.List;
 public class UmsMemberHandler {
 
 
-   @Autowired
-   private UmsMemberService umsMemberService;
+
+    @Autowired
+    private UmsMemberService umsMemberService;
 
     @RequestMapping("get/all/member")
     public List<UmsMember> getAllMember(){
