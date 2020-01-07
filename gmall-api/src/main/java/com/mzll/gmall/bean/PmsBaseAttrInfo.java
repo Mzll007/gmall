@@ -63,4 +63,6 @@ public class PmsBaseAttrInfo implements Serializable {
     public void setAttrValueList(List<PmsBaseAttrValue> attrValueList) {
         this.attrValueList = attrValueList;
     }
+
+
 }
