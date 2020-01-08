@@ -5,8 +5,8 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.mzll.gmall.bean.PmsBaseAttrInfo;
 import com.mzll.gmall.bean.PmsBaseAttrValue;
 import com.mzll.gmall.bean.PmsBaseSaleAttr;
-import com.mzll.gmall.bean.PmsProductSaleAttr;
 import com.mzll.gmall.service.PmsBaseAttrInfoService;
+import com.mzll.gmall.service.PmsBaseAttrValueService;
 import com.mzll.gmall.service.PmsProductSaleAttrService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,6 +27,17 @@ public class AttrInfoHandler {
     @Reference
     private PmsProductSaleAttrService pmsProductSaleAttrService;
 
+    @Reference
+    private PmsBaseAttrValueService pmsBaseAttrValueService;
+
+    @ResponseBody
+    @RequestMapping("getAttrValueList")
+    public List<PmsBaseAttrValue> getAttrValueList(String attrId){
+
+
+        return pmsBaseAttrValueService.getAttrValueList(attrId);
+    }
+
     @ResponseBody
     @RequestMapping("baseSaleAttrList")
     public List<PmsBaseSaleAttr> baseSaleAttrList(){
@@ -34,6 +45,7 @@ public class AttrInfoHandler {
 
         return pmsProductSaleAttrService.baseSaleAttrList();
     }
+
 
     @ResponseBody
     @RequestMapping("saveAttrInfo")

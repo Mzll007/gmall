@@ -1,9 +1,11 @@
 package com.mzll.gmall.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.mzll.gmall.bean.PmsProductImage;
 import com.mzll.gmall.bean.PmsProductInfo;
 import com.mzll.gmall.bean.PmsProductSaleAttr;
 import com.mzll.gmall.bean.PmsProductSaleAttrValue;
+import com.mzll.gmall.mapper.PmsProductImageMapper;
 import com.mzll.gmall.mapper.PmsProductInfoMapper;
 import com.mzll.gmall.mapper.PmsProductSaleAttrMapper;
 import com.mzll.gmall.mapper.PmsProductSaleAttrValueMapper;
@@ -25,6 +27,9 @@ public class PmsProductInfoServiceImpl implements PmsProductInfoService {
     @Autowired
     private PmsProductSaleAttrValueMapper pmsProductSaleAttrValueMapper;
 
+    @Autowired
+    private PmsProductImageMapper pmsProductImageMapper;
+
     @Override
     public List<PmsProductInfo> spuList(String catalog3Id) {
 
@@ -32,9 +37,7 @@ public class PmsProductInfoServiceImpl implements PmsProductInfoService {
         pmsProductInfo.setCatalog3Id(catalog3Id);
 
         List<PmsProductInfo> select = pmsProductInfoMapper.select(pmsProductInfo);
-        for (PmsProductInfo productInfo : select) {
-            productInfo.setSpuName(productInfo.getProductName());
-        }
+
         return select;
     }
 
@@ -66,13 +69,19 @@ public class PmsProductInfoServiceImpl implements PmsProductInfoService {
             // 保存销售属性值
             for (PmsProductSaleAttrValue pmsProductSaleAttrValue : spuSaleAttrValueList) {
 
-
                 pmsProductSaleAttrValue.setProductId(productId);
                 pmsProductSaleAttrValue.setSaleAttrId(saleAttrId);
                 pmsProductSaleAttrValueMapper.insertSelective(pmsProductSaleAttrValue);
             }
 
 
+        }
+        // 保存图片
+        List<PmsProductImage> spuImageList = pmsProductInfo.getSpuImageList();
+        for (PmsProductImage pmsProductImage : spuImageList) {
+
+            pmsProductImage.setProductId(productId);
+            pmsProductImageMapper.insertSelective(pmsProductImage);
         }
 
 
