@@ -15,7 +15,7 @@
     </parent>
 
     <dependencies>
-            <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+        <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
         <!-- 通用mapper -->
         <dependency>
             <groupId>tk.mybatis</groupId>

@@ -213,7 +213,4 @@ public class UmsMember implements Serializable {
     }
 
 
-
-
-
 }

@@ -3,8 +3,10 @@ package com.mzll.gmall.service.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.mzll.gmall.bean.PmsBaseAttrInfo;
 import com.mzll.gmall.bean.PmsBaseAttrValue;
+import com.mzll.gmall.bean.PmsProductSaleAttrValue;
 import com.mzll.gmall.mapper.PmsBaseAttrInfoMapper;
 import com.mzll.gmall.mapper.PmsBaseAttrValueMapper;
+import com.mzll.gmall.mapper.PmsProductSaleAttrValueMapper;
 import com.mzll.gmall.service.PmsBaseAttrInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,13 +21,27 @@ public class PmsBaseAttrInfoServiceImpl implements PmsBaseAttrInfoService {
     @Autowired
     private PmsBaseAttrValueMapper pmsBaseAttrValueMapper;
 
+
     @Override
     public List<PmsBaseAttrInfo> getAttrInfoList(String catalog3Id) {
 
+        // 查询attrinfolist
         PmsBaseAttrInfo pmsBaseAttrInfo = new PmsBaseAttrInfo();
         pmsBaseAttrInfo.setCatalog3Id(catalog3Id);
-        List<PmsBaseAttrInfo> select = pmsBaseAttrInfoMapper.select(pmsBaseAttrInfo);
-        return select;
+        List<PmsBaseAttrInfo> pmsBaseAttrInfoList = pmsBaseAttrInfoMapper.select(pmsBaseAttrInfo);
+
+        //
+        for (PmsBaseAttrInfo baseAttrInfo : pmsBaseAttrInfoList) {
+            // 查询value
+            PmsBaseAttrValue pmsBaseAttrValue = new PmsBaseAttrValue();
+            pmsBaseAttrValue.setAttrId(baseAttrInfo.getId());
+
+            List<PmsBaseAttrValue> pmsBaseAttrValues = pmsBaseAttrValueMapper.select(pmsBaseAttrValue);
+
+            baseAttrInfo.setAttrValueList(pmsBaseAttrValues);
+        }
+
+        return pmsBaseAttrInfoList;
     }
 
     @Override

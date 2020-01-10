@@ -14,6 +14,7 @@ public class PmsBaseSaleAttrServiceImpl implements PmsBaseSaleAttrService {
 
     @Autowired
     private PmsBaseSaleAttrMapper pmsBaseSaleAttrMapper;
+
     @Override
     public List<PmsBaseSaleAttr> spuList(String catalog3Id) {
         return pmsBaseSaleAttrMapper.selectAll();

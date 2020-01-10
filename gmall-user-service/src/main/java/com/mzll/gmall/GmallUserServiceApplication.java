@@ -8,8 +8,8 @@ import tk.mybatis.spring.annotation.MapperScan;
 @SpringBootApplication
 public class GmallUserServiceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(GmallUserServiceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(GmallUserServiceApplication.class, args);
+    }
 
 }

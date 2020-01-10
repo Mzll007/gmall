@@ -14,14 +14,13 @@ import java.util.List;
 public class UmsMemberHandler {
 
 
-
     @Reference
     private UmsMemberService umsMemberService;
 
 
     @ResponseBody
     @RequestMapping("get/all/member")
-    public List<UmsMember> getAllMember(){
+    public List<UmsMember> getAllMember() {
 
         return umsMemberService.getAll();
     }

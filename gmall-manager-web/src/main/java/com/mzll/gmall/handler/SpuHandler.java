@@ -2,8 +2,12 @@ package com.mzll.gmall.handler;
 
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.mzll.gmall.bean.PmsProductImage;
 import com.mzll.gmall.bean.PmsProductInfo;
+import com.mzll.gmall.bean.PmsProductSaleAttr;
+import com.mzll.gmall.service.PmsProductImageService;
 import com.mzll.gmall.service.PmsProductInfoService;
+import com.mzll.gmall.service.PmsProductSaleAttrService;
 import org.csource.common.MyException;
 import org.csource.fastdfs.ClientGlobal;
 import org.csource.fastdfs.StorageClient;
@@ -14,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 
 @Controller
@@ -25,7 +28,24 @@ public class SpuHandler {
     @Reference
     private PmsProductInfoService pmsProductInfoService;
 
+    @Reference
+    private PmsProductSaleAttrService pmsProductSaleAttrService;
 
+    @Reference
+    private PmsProductImageService pmsProductImageService;
+
+
+    @ResponseBody
+    @RequestMapping("spuImageList")
+    public List<PmsProductImage> spuImageList(String spuId) {
+        return pmsProductImageService.spuImageList(spuId);
+    }
+
+    @ResponseBody
+    @RequestMapping("spuSaleAttrList")
+    public List<PmsProductSaleAttr> spuSaleAttrList(String spuId) {
+        return pmsProductSaleAttrService.spuSaleAttrList(spuId);
+    }
 
     @ResponseBody
     @RequestMapping("fileUpload")
@@ -51,7 +71,7 @@ public class SpuHandler {
 
         for (String string : strings) {
 
-            url=url+"/"+string;
+            url = url + "/" + string;
 
         }
 
@@ -60,7 +80,7 @@ public class SpuHandler {
 
     @ResponseBody
     @RequestMapping("saveSpuInfo")
-    public String saveSpuInfo(@RequestBody PmsProductInfo pmsProductInfo){
+    public String saveSpuInfo(@RequestBody PmsProductInfo pmsProductInfo) {
 
         pmsProductInfoService.saveSpuInfo(pmsProductInfo);
         return "success";

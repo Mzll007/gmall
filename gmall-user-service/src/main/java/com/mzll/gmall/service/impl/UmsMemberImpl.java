@@ -14,6 +14,7 @@ public class UmsMemberImpl implements UmsMemberService {
 
     @Autowired
     private UmsMemberMapper umsMemberMapper;
+
     @Override
     public List<UmsMember> getAll() {
         return umsMemberMapper.selectAll();

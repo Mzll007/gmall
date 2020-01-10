@@ -27,7 +27,6 @@ public class CatalogServiceImpl implements CatalogService {
     private PmsBaseCatalog3Mapper pmsBaseCatalog3Mapper;
 
 
-
     @Override
     public List<PmsBaseCatalog1> getAll() {
 
