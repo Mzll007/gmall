@@ -24,7 +24,7 @@ import java.util.UUID;
 
 @Service
 public class PmsSkuInfoServiceImpl implements PmsSkuInfoService {
-    int i =0;
+    int i = 0;
     @Autowired
     private PmsSkuInfoMapper pmsSkuInfoMapper;
 
@@ -93,38 +93,38 @@ public class PmsSkuInfoServiceImpl implements PmsSkuInfoService {
     @Override
     public PmsSkuInfo getPmsSkuInfo(String skuId) {
         PmsSkuInfo pmsSkuInfo = null;
-        Jedis jedis=null;
+        Jedis jedis = null;
         try {
             // 查询缓存
             jedis = redisUtil.getJedis();
             String skuInfo = jedis.get("sku:" + skuId + ":info");
             if (StringUtils.isNotBlank(skuInfo)) {
-                System.err.println("redis"+i++);
+                System.err.println("redis" + i++);
                 pmsSkuInfo = JSON.parseObject(skuInfo, PmsSkuInfo.class);
             } else {
                 System.err.println("mysql");
                 String v = UUID.randomUUID().toString();
 
-                String k = "sku:"+skuId+":lock";
+                String k = "sku:" + skuId + ":lock";
 
                 // 加锁
-                jedis.set(k,v,"nx","ex",10);
+                jedis.set(k, v, "nx", "ex", 10);
 
 
                 String sV = jedis.get(k);
-                if(Objects.equals(v,sV)){
+                if (Objects.equals(v, sV)) {
 
 //                    // 释放锁方法二：k
-                    String script ="if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end";
-                    jedis.eval(script, Collections.singletonList(k),Collections.singletonList(v));
+                    String script = "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end";
+                    jedis.eval(script, Collections.singletonList(k), Collections.singletonList(v));
                     // 查询数据库
                     pmsSkuInfo = getPmsSkuInfoFromDb(skuId);
                     // 同步到缓存
                     jedis.set("sku:" + skuId + ":info", JSON.toJSONString(pmsSkuInfo));
                     // 释放锁方法一：
-                 //   jedis.del("sku:"+skuId+":lock");
+                    //   jedis.del("sku:"+skuId+":lock");
 
-                }else{
+                } else {
                     return getPmsSkuInfo(skuId);
                 }
             }

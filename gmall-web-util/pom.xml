@@ -4,13 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
+    <groupId>com.mzll.gmall</groupId>
     <artifactId>gmall-web-util</artifactId>
     <version>1.0-SNAPSHOT</version>
     <parent>
 
 
-        <groupId>org.example</groupId>
+        <groupId>com.mzll.gmall</groupId>
         <artifactId>gmall-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
@@ -37,7 +37,7 @@
             <artifactId>jsoup</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.example</groupId>
+            <groupId>com.mzll.gmall</groupId>
             <artifactId>gmall-common-util</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>

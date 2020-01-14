@@ -54,11 +54,11 @@ public class ItemHandler {
 
     @ResponseBody
     @RequestMapping("getMySpu")
-    public String getMySpu(String spuId){
+    public String getMySpu(String spuId) {
 
         List<PmsSkuInfo> pmsSkuInfos = pmsSkuInfoService.getSkuSaleAttrValue(spuId);
 
-        Map<String,String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>();
 
         for (PmsSkuInfo skuInfo : pmsSkuInfos) {
             List<PmsSkuSaleAttrValue> skuSaleAttrValueList = skuInfo.getSkuSaleAttrValueList();
@@ -67,7 +67,7 @@ public class ItemHandler {
                 k = k + "|" + pmsSkuSaleAttrValue.getSaleAttrValueId();
             }
             String v = skuInfo.getId();
-            map.put(k,v);
+            map.put(k, v);
         }
 
         String json = JSON.toJSONString(map);
@@ -84,7 +84,8 @@ public class ItemHandler {
 
         return json;
     }
- @RequestMapping("{skuId}.html")
+
+    @RequestMapping("{skuId}.html")
     public String getPmsSkuInfo(@PathVariable String skuId, ModelMap modelMap) {
         // 获取sku信息
         PmsSkuInfo pmsSkuInfo = pmsSkuInfoService.getPmsSkuInfo(skuId);
@@ -100,7 +101,7 @@ public class ItemHandler {
         List<PmsSkuInfo> pmsSkuInfos = pmsSkuInfoService.getSkuSaleAttrValue(productId);
 
 
-        Map<String,String> map = new HashMap<String ,String>();
+        Map<String, String> map = new HashMap<String, String>();
         for (PmsSkuInfo skuInfo : pmsSkuInfos) {
             List<PmsSkuSaleAttrValue> skuSaleAttrValueList = skuInfo.getSkuSaleAttrValueList();
             String k = "";
@@ -108,7 +109,7 @@ public class ItemHandler {
                 k = k + "|" + pmsSkuSaleAttrValue.getSaleAttrValueId();
             }
             String v = skuInfo.getId();
-            map.put(k,v);
+            map.put(k, v);
         }
         modelMap.addAttribute("skuIdMap", JSON.toJSON(map));
 

@@ -15,6 +15,7 @@ public class GmallManagerServiceApplicationTests {
 
     @Autowired
     RedisUtil redisUtil;
+
     @Test
     public void contextLoads() {
         Jedis jedis = redisUtil.getJedis();

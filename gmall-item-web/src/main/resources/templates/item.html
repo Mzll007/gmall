@@ -1038,7 +1038,7 @@
 
         $.getJSON("spuIdMap/spuId_" + spuId + ".json", function (json) {
                 if (json) {
-                   var skuId = json[key];
+                    var skuId = json[key];
                     if (skuId) {
                         window.location.href = "/" + skuId + ".htm";
                     }

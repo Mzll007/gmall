@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mzll.gmall.mapper.PmsProductSaleAttrMapper">
-	<select id="getPmsProductSaleAttrs" resultMap="getPmsProductSaleAttrsMap">
+    <select id="getPmsProductSaleAttrs" resultMap="getPmsProductSaleAttrsMap">
     SELECT
     psa.id psa_id,
     psav.id psav_id,
@@ -22,14 +22,15 @@
 
   </select>
 
-	<resultMap id="getPmsProductSaleAttrsMap" type="com.mzll.gmall.bean.PmsProductSaleAttr" autoMapping="true">
-		<id column="psa_id" property="id" />
-		<collection property="spuSaleAttrValueList" ofType="com.mzll.gmall.bean.PmsProductSaleAttrValue" autoMapping="true">
-			<id column="psav_id" property="id"/>
+    <resultMap id="getPmsProductSaleAttrsMap" type="com.mzll.gmall.bean.PmsProductSaleAttr" autoMapping="true">
+        <id column="psa_id" property="id"/>
+        <collection property="spuSaleAttrValueList" ofType="com.mzll.gmall.bean.PmsProductSaleAttrValue"
+                    autoMapping="true">
+            <id column="psav_id" property="id"/>
 
 
-		</collection>
+        </collection>
 
-	</resultMap>
+    </resultMap>
 </mapper>
 

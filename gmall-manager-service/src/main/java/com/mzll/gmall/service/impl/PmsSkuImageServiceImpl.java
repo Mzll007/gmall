@@ -14,6 +14,7 @@ public class PmsSkuImageServiceImpl implements PmsSkuImageService {
 
     @Autowired
     private PmsSkuImageMapper pmsSkuImageMapper;
+
     @Override
     public List<PmsSkuImage> getPmsSkuImage(String skuId) {
 

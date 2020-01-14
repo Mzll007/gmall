@@ -19,16 +19,15 @@ public class JedisConfig {
     private int database;
 
     @Bean
-    public RedisUtil getRedisUtil(){
+    public RedisUtil getRedisUtil() {
 
-        if(host.equals("disabled")){
+        if (host.equals("disabled")) {
             return null;
         }
         RedisUtil redisUtil = new RedisUtil();
-        redisUtil.initPool(host,port,database);
+        redisUtil.initPool(host, port, database);
         return redisUtil;
     }
-
 
 
 }
