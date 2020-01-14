@@ -55,4 +55,12 @@ public class PmsProductSaleAttrServiceImpl implements PmsProductSaleAttrService 
         // 返回结果
         return pmsProductSaleAttrs;
     }
+
+    @Override
+    public List<PmsProductSaleAttr> getPmsProductSaleAttrs(String skuId, String productId) {
+
+        List<PmsProductSaleAttr> pmsProductSaleAttrs = pmsProductSaleAttrMapper.getPmsProductSaleAttrs(skuId, productId);
+
+        return pmsProductSaleAttrs;
+    }
 }

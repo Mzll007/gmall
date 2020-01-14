@@ -10,4 +10,6 @@ public interface PmsProductSaleAttrService {
     List<PmsBaseSaleAttr> baseSaleAttrList();
 
     List<PmsProductSaleAttr> spuSaleAttrList(String spuId);
+
+    List<PmsProductSaleAttr> getPmsProductSaleAttrs(String skuId, String productId);
 }

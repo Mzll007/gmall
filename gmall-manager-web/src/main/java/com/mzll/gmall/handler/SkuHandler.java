@@ -20,7 +20,7 @@ public class SkuHandler {
 
     @RequestMapping("saveSkuInfo")
     @ResponseBody
-    public String saveSkuInfo(@RequestBody PmsSkuInfo pmsSkuInfo){
+    public String saveSkuInfo(@RequestBody PmsSkuInfo pmsSkuInfo) {
         pmsSkuInfoService.saveSkuInfo(pmsSkuInfo);
         return "success";
     }
