@@ -3,13 +3,13 @@ package com.mzll.gmall.service.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.mzll.gmall.bean.PmsBaseAttrInfo;
 import com.mzll.gmall.bean.PmsBaseAttrValue;
-import com.mzll.gmall.bean.PmsProductSaleAttrValue;
 import com.mzll.gmall.mapper.PmsBaseAttrInfoMapper;
 import com.mzll.gmall.mapper.PmsBaseAttrValueMapper;
-import com.mzll.gmall.mapper.PmsProductSaleAttrValueMapper;
 import com.mzll.gmall.service.PmsBaseAttrInfoService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -60,5 +60,15 @@ public class PmsBaseAttrInfoServiceImpl implements PmsBaseAttrInfoService {
         for (PmsBaseAttrValue baseAttrValue : pmsBaseAttrValues) {
             pmsBaseAttrValueMapper.insertSelective(baseAttrValue);
         }
+    }
+
+    @Override
+    public List<PmsBaseAttrInfo> getAttrListByValueIds(HashSet<String> set) {
+        String join = StringUtils.join(set, ",");
+
+
+        List<PmsBaseAttrInfo> pmsBaseAttrInfoList = pmsBaseAttrInfoMapper.selectAttrListByValueIds(join);
+        return pmsBaseAttrInfoList;
+
     }
 }

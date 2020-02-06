@@ -161,4 +161,23 @@ public class PmsSkuInfoServiceImpl implements PmsSkuInfoService {
 
         return pmsSkuInfos;
     }
+
+    @Override
+    public List<PmsSkuInfo> getAllSku() {
+        List<PmsSkuInfo> pmsSkuInfoList = pmsSkuInfoMapper.selectAll();
+        for (PmsSkuInfo pmsSkuInfo : pmsSkuInfoList) {
+
+            String id = pmsSkuInfo.getId();
+            // 根据id查询attrvalue
+            PmsSkuAttrValue pmsSkuAttrValue = new PmsSkuAttrValue();
+            pmsSkuAttrValue.setSkuId(id);
+
+            List<PmsSkuAttrValue> skuAttrValues = pmsSkuAttrValueMapper.select(pmsSkuAttrValue);
+            pmsSkuInfo.setSkuAttrValueList(skuAttrValues);
+        }
+
+        return pmsSkuInfoList;
+    }
+
+
 }

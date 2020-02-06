@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mzll.gmall.mapper.PmsBaseAttrInfoMapper">
+
+    <select id="selectAttrListByValueIds" resultMap="selectAttrListByValueIdsMap">
+        select pbai.id as bai_id,pbai.*,pbav.id as bav_id ,pbav.*
+
+        from pms_base_attr_info pbai ,pms_base_attr_value pbav
+        where pbai.id = pbav.attr_id
+        and pbav.id in (${join})
+
+
+    </select>
+    <resultMap id="selectAttrListByValueIdsMap" type="com.mzll.gmall.bean.PmsBaseAttrInfo" autoMapping="true">
+
+        <result property="id" column="bai_id"></result>
+        <result property="attr_name" column="attrName"></result>
+        <result property="catalog3_id" column="catalog3Id"></result>
+        <result property="id" column="bai_id"></result>
+
+
+        <collection property="attrValueList" ofType="com.mzll.gmall.bean.PmsBaseAttrValue" autoMapping="true">
+            <result property="id" column="bav_id"></result>
+            <result property="valueName" column="value_name"></result>
+            <result property="attr_id" column="attrId"></result>
+
+        </collection>
+    </resultMap>
+
+</mapper>

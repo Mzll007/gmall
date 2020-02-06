@@ -9,7 +9,6 @@ import com.mzll.gmall.mapper.PmsBaseCatalog2Mapper;
 import com.mzll.gmall.mapper.PmsBaseCatalog3Mapper;
 import com.mzll.gmall.service.CatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
