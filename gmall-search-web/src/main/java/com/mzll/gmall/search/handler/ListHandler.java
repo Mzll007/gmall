@@ -145,7 +145,7 @@ public class ListHandler {
 
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/index")
     public String index() {
 
         return "index";

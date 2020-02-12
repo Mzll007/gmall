@@ -1,13 +1,13 @@
-package com.mzll.gmall;
-
+package com.mzll.gmall.passport;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.test.context.junit4.SpringRunner;
 
 @SpringBootApplication
-public class MainClass {
+public class PassportApplication {
+
     public static void main(String[] args) {
-        SpringApplication.run(MainClass.class, args);
+        SpringApplication.run(PassportApplication.class, args);
     }
+
 }

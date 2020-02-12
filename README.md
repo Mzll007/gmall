@@ -10,3 +10,6 @@ gmall-search-web:8084<br/>
 gmall-search-service:8085<br/>
 gmall-cart-web:8074<br/>
 gmall-cart-service:8075<br/>
+gmall-passport:8087<br/>
+gmall-order-web:8086<br/>
+
