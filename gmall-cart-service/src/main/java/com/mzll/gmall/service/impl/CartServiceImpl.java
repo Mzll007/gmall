@@ -6,6 +6,7 @@ import com.mzll.gmall.bean.OmsCartItem;
 import com.mzll.gmall.bean.UmsMemberReceiveAddress;
 import com.mzll.gmall.mapper.CartMapper;
 import com.mzll.gmall.service.CartService;
+import com.mzll.gmall.util.CookieUtil;
 import com.mzll.gmall.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.Jedis;
@@ -95,6 +96,20 @@ public class CartServiceImpl implements CartService {
 
         // 同步缓存
         flushCartListCache(userId);
+    }
+
+    @Override
+    public void deleteHadPayCart(String userId) {
+
+        Example example = new Example(OmsCartItem.class);
+        example.createCriteria().andEqualTo("memberId",userId).andEqualTo("isChecked","1");
+        cartMapper.deleteByExample(example);
+
+
+        // 同步缓存
+        flushCartListCache(userId);
+
+
     }
 
 

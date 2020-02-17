@@ -5,11 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
-@MapperScan("com.mzll.gmall.pay.mapper")
-public class GmallPayApplication {
+@MapperScan("com.mzll.gmall.order.mapper")
+public class GmallOrderServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(GmallPayApplication.class, args);
+        SpringApplication.run(GmallOrderServiceApplication.class, args);
     }
 
 }

@@ -34,38 +34,38 @@ public class CartHandler {
 
     @LoginRequired(ifMust = false)
     @RequestMapping("checkCart")
-    public String checkCart(String skuId,String isChecked,HttpServletRequest request,HttpServletResponse response,ModelMap modelMap){
+    public String checkCart(String skuId, String isChecked, HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
         String userId = (String) request.getAttribute("userId");// 测试数据
         List<OmsCartItem> omsCartItems = new ArrayList<>();
-        if(StringUtils.isNotBlank(userId)){
+        if (StringUtils.isNotBlank(userId)) {
             // 已登录 修改db
-            cartService.updateCartChecked(userId,skuId,isChecked);
+            cartService.updateCartChecked(userId, skuId, isChecked);
             omsCartItems = cartService.getCartsByMemberId(userId);
-        }else{
+        } else {
             // 未登录 修改cookie
             String cartListCookieStr = CookieUtil.getCookieValue(request, "cartListCookie", true);
             omsCartItems = JSON.parseArray(cartListCookieStr, OmsCartItem.class);
 
-            if(omsCartItems!=null&&omsCartItems.size()>0){
+            if (omsCartItems != null && omsCartItems.size() > 0) {
                 for (OmsCartItem omsCartItem : omsCartItems) {
 
-                    if(omsCartItem.getProductSkuId().equals(skuId)){
+                    if (omsCartItem.getProductSkuId().equals(skuId)) {
                         omsCartItem.setIsChecked(isChecked);
                     }
                 }
 
+                // 覆盖缓存
+                CookieUtil.setCookie(request, response, "cartListCookie", JSON.toJSONString(omsCartItems), 1000 * 60 * 60 * 2, true);
             }
-            // 覆盖缓存
-            CookieUtil.setCookie(request,response,"cartListCookie",JSON.toJSONString(omsCartItems),1000*60*60*2,true);
 
         }
 
-        modelMap.addAttribute("cartList",omsCartItems);
+        modelMap.addAttribute("cartList", omsCartItems);
         // 计算总金额
-       if(omsCartItems!=null){
-          BigDecimal sumMoney = getSumMoney(omsCartItems);
-          modelMap.put("sum",sumMoney);
-       }
+        if (omsCartItems != null) {
+            BigDecimal sumMoney = getSumMoney(omsCartItems);
+            modelMap.put("sum", sumMoney);
+        }
 
         return "cartListInner";
     }
@@ -74,13 +74,14 @@ public class CartHandler {
 
         BigDecimal sum = new BigDecimal("0");
         for (OmsCartItem omsCartItem : omsCartItems) {
-            if(omsCartItem.getIsChecked().equals("1")){
+            if (omsCartItem.getIsChecked().equals("1")) {
                 sum = sum.add(omsCartItem.getPrice().multiply(omsCartItem.getQuantity()));
             }
 
         }
         return sum;
     }
+
     @LoginRequired(ifMust = false)
     @RequestMapping("cartList")
     public String cartList(HttpServletRequest request, ModelMap modelMap) {
@@ -97,12 +98,13 @@ public class CartHandler {
             String cartListCookieStr = CookieUtil.getCookieValue(request, "cartListCookie", true);
             if (StringUtils.isNotBlank(cartListCookieStr)) {
 
-                JSON.parseArray(cartListCookieStr, OmsCartItem.class);
+                cartItems = JSON.parseArray(cartListCookieStr, OmsCartItem.class);
             }
         }
-        modelMap.addAttribute("cartList",cartItems);
+        modelMap.addAttribute("cartList", cartItems);
         return "cartList";
     }
+
     @LoginRequired(ifMust = false)
     @RequestMapping("addToCart")
     public String addToCart(HttpServletRequest request, HttpServletResponse response, String skuId, BigDecimal quantity) {

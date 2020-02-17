@@ -16,4 +16,5 @@ public interface CartService {
 
     void updateCartChecked(String userId, String skuId, String isChecked);
 
+    void deleteHadPayCart(String userId);
 }

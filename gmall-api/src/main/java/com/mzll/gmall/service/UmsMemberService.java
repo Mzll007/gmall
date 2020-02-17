@@ -19,4 +19,6 @@ public interface UmsMemberService {
     List<UmsMemberReceiveAddress> getUmsMemberReceiveAddressByUserId(String userId);
 
     UmsMember addVloginUser(UmsMember umsMember);
+
+    void sendHadLogin(String id, String nickname);
 }

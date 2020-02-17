@@ -156,12 +156,13 @@
 
     function login(){
       var s = encodeURIComponent("http://cart.gmall.com/cartList");
-       window.location.href="http://passport.atguigu.com/index?originUrl="+s;
+       window.location.href="http://passport.gmall.com/index?originUrl="+s;
     }
 
     function checkSku( chkbox){
        var skuId= $(chkbox).attr("value");
        var checked=$(chkbox).prop("checked");
+
        var isCheckedFlag="0";
        if(checked){
            isCheckedFlag="1";
